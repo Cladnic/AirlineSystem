@@ -1,6 +1,7 @@
 .navButton {
     -fx-background-color: #273a40;
     -fx-color:  #d5bb93;
+    -fx-cursor: hand;
 }
 
 .navButton:hover {
