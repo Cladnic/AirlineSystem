@@ -21,8 +21,7 @@ public class Main extends Application {
         mainLayout=loader.load();
         Parent root = FXMLLoader.load(getClass().getResource("fxml/HomePage.fxml"));
         primaryStage.setTitle("Johans Airline booking");
-        primaryStage.setMinHeight(400);
-        primaryStage.setMinWidth(600);
+        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         showMainView();

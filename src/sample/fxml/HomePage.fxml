@@ -56,6 +56,15 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </Button>
+                  <Button disable="true" mnemonicParsing="false" onAction="#selectScene" stylesheets="@../../resources/homePageButtons.css" text="Home" textFill="#d5bb93">
+                     <styleClass>
+                        <String fx:value="navButton" />
+                        <String fx:value="navButton" />
+                     </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </Button>
                   <Button mnemonicParsing="false" onAction="#selectScene" styleClass="navButton" stylesheets="@../../resources/homePageButtons.css" text="Booking" textFill="#d5bb93">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />

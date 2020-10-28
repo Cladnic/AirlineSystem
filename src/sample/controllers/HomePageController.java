@@ -18,7 +18,6 @@ public class HomePageController {
     @FXML
     HBox hBoxGlobalNav;
 
-    @FXML
     public void initialize(){
         Image image = new Image("resources/flight.png");
         flightIcon.setImage(image);
@@ -29,6 +28,7 @@ public class HomePageController {
             case "Settings"-> Main.loadCenter("fxml/SettingsPage.fxml");
             case "Overview"-> Main.loadCenter("fxml/OverviewPage.fxml");
             case "Booking" -> Main.loadCenter("fxml/BookingPage.fxml");
+            case "Help" -> Main.loadCenter("fxml/SettingsPage.fxml");
             default -> Main.showMainView();
         }
         for (Node btnSceneSelect : hBoxGlobalNav.getChildren()) {

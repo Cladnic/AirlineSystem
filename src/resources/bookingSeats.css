@@ -1,9 +1,10 @@
-.navButton {
+.seat {
     -fx-background-color: #273a40;
-    -fx-text-fill:  #d5bb93;
     -fx-cursor: hand;
+    -fx-border-color:  #d5bb93;
+    -fx-text-fill: #d5bb93;
 }
 
-.navButton:hover {
+.seat:hover {
     -fx-background-color: #53656b;
 }
