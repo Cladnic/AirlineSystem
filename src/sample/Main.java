@@ -66,7 +66,7 @@ public class Main extends Application {
             conn.setRequestProperty("X-Api-Key", "NfAAXOwfDztlHDamHRGrnprKPprHQV");
 
             if (conn.getResponseCode() != 200) {
-                try (FileReader f = new FileReader("src/resources/Airports.txt")) {
+                try (FileReader f = new FileReader("src/resources/Airports.csv")) {
                     StringBuffer sb = new StringBuffer();
                     while (f.ready()) {
                         char c = (char) f.read();

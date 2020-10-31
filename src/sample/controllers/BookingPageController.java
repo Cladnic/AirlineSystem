@@ -59,7 +59,9 @@ public class BookingPageController {
         ArrayList<String> airList = Main.getAirportList();
         Pattern p = Pattern.compile(",/S");
         for(int i=0; i<airList.size(); i++){
-            airList.set(i,airList.get(i).replaceAll("[^ .,a-zA-Z0-9]",""));
+            airList.set(i,airList.get(i).replace("[",""));
+            airList.set(i,airList.get(i).replace("]",""));
+            airList.set(i,airList.get(i).replaceAll("[(){}\"]",""));
             airList.set(i,airList.get(i).replaceAll(",(\\S)",", $1"));
             if(airList.get(i).endsWith(",")){
                 airList.set(i,airList.get(i).substring(0,airList.get(i).length()-1));
