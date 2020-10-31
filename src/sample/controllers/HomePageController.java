@@ -12,7 +12,6 @@ import java.io.IOException;
 import sample.Main;
 
 public class HomePageController {
-
     @FXML
     ImageView flightIcon;
     @FXML
