@@ -6,21 +6,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Main extends Application {
     private static BorderPane mainLayout;
     private static Stage primaryStage;
-    private static String apiOutput;
+    private static final ArrayList<String> airportList = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
         //get airport list on a new thread
         new Thread(Main::airportApiFetch).start();
 
@@ -52,12 +49,12 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static String getAirportList(){
-        return apiOutput;
+    public static ArrayList<String> getAirportList(){
+        return airportList;
     }
 
     //get list of airports from API
-    private static void airportApiFetch(){
+    private static void airportApiFetch() {
         URL url;
         HttpURLConnection conn = null;
         BufferedReader br;
@@ -67,11 +64,28 @@ public class Main extends Application {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("X-Api-Key", "NfAAXOwfDztlHDamHRGrnprKPprHQV");
+
             if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+                try (FileReader f = new FileReader("src/resources/Airports.csv")) {
+                    StringBuffer sb = new StringBuffer();
+                    while (f.ready()) {
+                        char c = (char) f.read();
+                        if (c == '\n') {
+                            airportList.add(sb.toString());
+                            sb = new StringBuffer();
+                        } else {
+                            sb.append(c);
+                        }
+                    }
+                    if (sb.length() > 0) {
+                        airportList.add(sb.toString());
+                    }
+                }
+                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode()+"\n-> Local file has been used instead of API and program should still work");
             }
+
             br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-            apiOutput = br.readLine();
+            airportList.add(br.readLine()); //TODO: I thin this only reads in everything as one line. Read it to string and split at }, and read in to array
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
@@ -79,7 +93,6 @@ public class Main extends Application {
             conn.disconnect();
         }
     }
-
     public static void main(String[] args) {
         launch(args);
     }
