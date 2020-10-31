@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
@@ -17,7 +16,6 @@ import javafx.scene.text.Text;
 import sample.AutoCompleteComboBoxListener;
 import sample.Main;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class BookingPageController {
     ObservableList<String> airportList;
@@ -57,7 +55,6 @@ public class BookingPageController {
 
     private void loadComboBoxes(){
         ArrayList<String> airList = Main.getAirportList();
-        Pattern p = Pattern.compile(",/S");
         for(int i=0; i<airList.size(); i++){
             airList.set(i,airList.get(i).replace("[",""));
             airList.set(i,airList.get(i).replace("]",""));

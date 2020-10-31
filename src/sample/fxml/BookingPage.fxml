@@ -23,13 +23,13 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Text fill="#d5bb93" strokeType="OUTSIDE" strokeWidth="0.0" text="From " />
-                        <ComboBox fx:id="comboBoxAirportsFrom" prefWidth="150.0" style="-fx-background-color: #53656b;">
+                        <ComboBox fx:id="comboBoxAirportsFrom" prefWidth="150.0" styleClass="comboBox" stylesheets="@../../resources/comboBox.css">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </ComboBox>
                         <Text fill="#d5bb93" strokeType="OUTSIDE" strokeWidth="0.0" text="To " />
-                        <ComboBox fx:id="comboBoxAirportsTo" prefWidth="150.0" style="-fx-background-color: #53656b;" />
+                        <ComboBox fx:id="comboBoxAirportsTo" prefWidth="150.0" styleClass="comboBox" stylesheets="@../../resources/comboBox.css" />
                      </children>
                      <VBox.margin>
                         <Insets />

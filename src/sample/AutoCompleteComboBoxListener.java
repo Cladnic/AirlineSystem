@@ -1,17 +1,12 @@
 package sample;
 
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+
 
 public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
 
@@ -23,6 +18,7 @@ public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
 
     public AutoCompleteComboBoxListener(final ComboBox comboBox) {
         this.comboBox = comboBox;
+
         sb = new StringBuilder();
         data = comboBox.getItems();
 
@@ -39,7 +35,6 @@ public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent event) {
-
         if(event.getCode() == KeyCode.UP) {
             caretPos = -1;
             moveCaret(comboBox.getEditor().getText().length());
