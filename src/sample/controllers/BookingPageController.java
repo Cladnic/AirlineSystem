@@ -12,12 +12,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import sample.AutoCompleteComboBoxListener;
 import sample.Main;
 import java.util.ArrayList;
 
 public class BookingPageController {
     ObservableList<String> airportList;
+    Boolean seatChosen = false;
 
     @FXML
     BorderPane borderPaneSeats;
@@ -33,6 +35,10 @@ public class BookingPageController {
     ComboBox comboBoxAirportsFrom;
     @FXML
     ComboBox comboBoxAirportsTo;
+    @FXML
+    Text txtRoute;
+    @FXML
+    Text txtSeat;
 
     public void initialize() {
         new Thread(this::fetchImages).start();
@@ -55,6 +61,8 @@ public class BookingPageController {
             airList.set(i,airList.get(i).replace("},",""));
             airList.set(i,airList.get(i).replace("]",""));
             airList.set(i,airList.get(i).replace("\"",""));
+            airList.set(i,airList.get(i).replace("-"," "));
+            airList.set(i,airList.get(i).replace(",",", "));
         }
         airportList = FXCollections.observableArrayList(airList);
         comboBoxAirportsFrom.setItems(airportList);
@@ -83,15 +91,21 @@ public class BookingPageController {
 
     public void choseSeat(ActionEvent actionEvent) {
         for (Node seat : gridSeats.getChildren()) { seat.setDisable(((Button) seat).equals(actionEvent.getSource())); }
-            System.out.println("You have chosen seat nr: " + ((Button) actionEvent.getSource()).getText());
+        txtSeat.setText("You have chosen seat nr: " + ((Button) actionEvent.getSource()).getText());
+        seatChosen = true;
+    }
+
+    public void seatContinue(ActionEvent actionEvent) {
+        if(seatChosen){
+            
+        }else{
+            txtSeat.setText("Please chose a seat first");
+        }
     }
 
     public void nextStep(ActionEvent actionEvent) {
+        txtRoute.setText("Please choose a seat for your route:\n"+comboBoxAirportsFrom.getValue()+" - "+comboBoxAirportsTo.getValue());
         vBoxFromTo.setVisible(false);
         borderPaneSeats.setVisible(true);
-    }
-
-    public void autoComplete(ActionEvent actionEvent) {
-        System.out.println("h");
     }
 }
