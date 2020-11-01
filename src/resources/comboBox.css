@@ -1,0 +1,27 @@
+.comboBox {
+    -fx-background:  #53656b;
+    -fx-text-fill: #d5bb93;
+}
+
+.list-cell {
+    -fx-background-color:  #53656b;
+    -fx-text-fill: #d5bb93;
+}
+
+.list-cell:hover {
+    -fx-background-color:  #d5bb93;
+    -fx-text-fill: black;
+}
+
+.arrow-button {
+    -fx-background-color:  #53656b;
+}
+
+.arrow {
+    -fx-background-color:  #d5bb93;
+}
+
+.text-field {
+    -fx-background-color:  #53656b;
+    -fx-text-fill: #d5bb93;
+}

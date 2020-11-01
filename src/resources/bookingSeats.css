@@ -1,0 +1,11 @@
+.seat {
+    -fx-background-color: #273a40;
+    -fx-cursor: hand;
+    -fx-border-color:  #d5bb93;
+    -fx-text-fill: #d5bb93;
+    -fx-border-radius: 5px;
+}
+
+.seat:hover {
+    -fx-background-color: #53656b;
+}

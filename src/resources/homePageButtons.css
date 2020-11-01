@@ -1,0 +1,11 @@
+.navButton {
+    -fx-background-color: #273a40;
+    -fx-background-radius: 5px;
+    -fx-text-fill:  #d5bb93;
+    -fx-cursor: hand;
+    -fx-border-radius: 5px;
+}
+
+.navButton:hover {
+    -fx-background-color: #53656b;
+}
