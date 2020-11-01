@@ -8,13 +8,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Main extends Application {
     private static BorderPane mainLayout;
     private static Stage primaryStage;
     private static final ArrayList<String> airportList = new ArrayList<>();
+    private static String[] tempAirport = null;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -81,18 +86,25 @@ public class Main extends Application {
                         airportList.add(sb.toString());
                     }
                 }
-                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode()+"\n-> Local file has been used instead of API and program should still work");
+                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode() + "\nIf error code is 500 it means daily requests has been exceeded\n-> Local file has been used instead of API and program should still work");
             }
 
             br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-            airportList.add(br.readLine()); //TODO: I thin this only reads in everything as one line. Read it to string and split at }, and read in to array
-        } catch (Exception e) {
-            e.printStackTrace();
+            String read = br.readLine();
+            tempAirport = read.split("[{]");
+            for (String part : tempAirport){
+                if(!part.equals(tempAirport[0])) {
+                    airportList.add(part);
+                }
+            }
+        } catch (IOException protocolException) {
+            protocolException.printStackTrace();
         }finally {
             assert conn != null;
             conn.disconnect();
         }
     }
+
     public static void main(String[] args) {
         launch(args);
     }

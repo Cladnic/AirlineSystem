@@ -60,6 +60,10 @@ public class BookingPageController {
             airList.set(i,airList.get(i).replace("]",""));
             airList.set(i,airList.get(i).replaceAll("[(){}\"]",""));
             airList.set(i,airList.get(i).replaceAll(",(\\S)",", $1"));
+            airList.set(i,airList.get(i).replace("location:", ""));
+            airList.set(i,airList.get(i).replace("locationName:", ""));
+            airList.set(i,airList.get(i).replace("country:", ""));
+            airList.set(i,airList.get(i).replace("iataCode:", ""));
             if(airList.get(i).endsWith(",")){
                 airList.set(i,airList.get(i).substring(0,airList.get(i).length()-1));
             }
