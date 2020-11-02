@@ -1,3 +1,3 @@
 # AirlineSystem
-A hobby project where I created an airline system with Java, JavaFx, CSS, and SceneBuilder
+A hobby project where I am creating an airline booking system with Java, JavaFx, CSS, and SceneBuilder
 
