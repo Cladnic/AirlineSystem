@@ -60,17 +60,20 @@ public class Main extends Application {
 
     //get list of airports from API
     private static void airportApiFetch() {
+        boolean API = false;
         URL url;
         HttpURLConnection conn = null;
         BufferedReader br;
         try {
-            url = new URL("https://api.easypnr.com/v4/airports");
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("X-Api-Key", "NfAAXOwfDztlHDamHRGrnprKPprHQV");
+            if (API) {
+                url = new URL("https://api.easypnr.com/v4/airports");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setRequestProperty("X-Api-Key", "NfAAXOwfDztlHDamHRGrnprKPprHQV");
+            }
 
-            if (conn.getResponseCode() != 200) {
+            if (!API || conn.getResponseCode() != 200) {
                 try (FileReader f = new FileReader("src/resources/Airports.csv")) {
                     StringBuffer sb = new StringBuffer();
                     while (f.ready()) {
@@ -86,7 +89,7 @@ public class Main extends Application {
                         airportList.add(sb.toString());
                     }
                 }
-                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode() + "\nIf error code is 500 it means daily requests has been exceeded\n-> Local file has been used instead of API and program should still work");
+                throw new RuntimeException("Failed : HTTP error code : look at this row" + /*conn.getResponseCode()*/  "\nIf error code is 500 it means daily requests has been exceeded\n-> Local file has been used instead of API and program should still work");
             }
 
             br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -100,8 +103,10 @@ public class Main extends Application {
         } catch (IOException protocolException) {
             protocolException.printStackTrace();
         }finally {
-            assert conn != null;
-            conn.disconnect();
+            if(API) {
+                assert conn != null;
+                conn.disconnect();
+            }
         }
     }
 
